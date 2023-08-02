@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Read and Print JSON</title>
+</head>
+<body>
+    <pre id="output"></pre>
+
+    <script>
+        var t=""
+        var currentTime=""
+        function readAndPrintJSON() {
+          
+            const filePath = 'todos.json';
+            fetch(filePath)
+                .then(response => response.json())
+                .then(data => {
+                    var formattedData = JSON.stringify(data, null, 4);
+                    t=JSON.parse(formattedData)[0].createdAt.slice(11,16);
+                    document.getElementById('output').innerText = t;
+                    console.log(t)
+                })
+                .catch(error => {
+                    console.error('Error reading or parsing JSON:', error);
+                });
+        }
+
+        // while(true){
+        //     currentTime=new Date();
+        //     currentTimeT=(""+currentTime).slice(16,21)
+        //     console.log(currentTimeT)
+            
+        //     if(t==currentTimeT){
+        //         alert("Its Time Delayed")
+        //     }
+
+        // }
+
+        // Call the function to read and print JSON when the page is loaded
+        window.addEventListener('load', readAndPrintJSON);
+    </script>
+</body>
+</html>
